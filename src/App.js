@@ -31,7 +31,7 @@ class App extends Component {
                 </Col>
             </Row>
             <Row>
-                <Col>
+                <Col sm={12} md={6}>
                     <Card>
                         <CardImg top width="100%" src="https://placekitten.com/318/180" alt="Cat image" />
                         <CardBody>
@@ -42,7 +42,7 @@ class App extends Component {
                         </CardBody>
                     </Card>
                 </Col>
-                <Col>
+                <Col sm={12} md={6}>
                     <Card>
                         <CardImg top width="100%" src="https://placekitten.com/318/181" alt="Cat image" />
                         <CardBody>
