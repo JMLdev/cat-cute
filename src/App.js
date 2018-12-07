@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Container, Row, Col, Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Progress } from 'reactstrap';
-
+  
 class App extends Component {
     render() {
         return (

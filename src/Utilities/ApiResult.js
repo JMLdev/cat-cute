@@ -32,7 +32,7 @@ export default class ApiResult extends Component {
           <ul>
             { this.state.cats.map(cat => <li key={cat.image.id}><img src={cat.image.url} alt={cat.image.id} /></li>)}
           </ul>
-        )
+        );
       }
 }
 
