@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Card, CardImg, CardText, CardBody,
-<<<<<<< HEAD
-  CardTitle, CardSubtitle, Button, Progress } from 'reactstrap';
-  
-=======
   CardTitle, CardSubtitle, Button } from 'reactstrap';
 
 import Graph from './Components/Graph';
 import Heading from './Components/Heading';
 
->>>>>>> 89d13ef20e7a3dd51913facb329a430aa53a1cd3
 class App extends Component {
     render() {
         return (
