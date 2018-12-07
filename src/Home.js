@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom';
 
 import Heading from './Components/Heading';
 import Graph from './Components/Graph';
-
+import Navigation from './Components/Navigation';
+import Footer from './Components/Footer';
 class Home extends Component {
     render() {
         return (
-            <Container>
+            <React.Fragment>
                 <Heading heading='Cats, cute or crap?' />
                 <Graph />
                 <Row>
@@ -43,7 +44,7 @@ class Home extends Component {
                         </Card>
                     </Col>
                 </Row>
-            </Container>
+            </React.Fragment>
         )
     }
 }

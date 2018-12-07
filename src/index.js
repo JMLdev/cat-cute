@@ -4,12 +4,20 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+import { Container } from 'reactstrap';
+
+import Navigation from './Components/Navigation';
+import Footer from './Components/Footer';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
     <BrowserRouter>
-        <App />
+        <Container>
+            <Navigation />
+            <App />
+            <Footer />
+        </Container>
     </BrowserRouter>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
