@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, CardImg, CardText, CardBody,
+import { Row, Col, Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import Heading from './Components/Heading';
 import Graph from './Components/Graph';
-
 class Home extends Component {
     render() {
         return (
-            <Container>
+            <React.Fragment>
                 <Heading heading='Cats, cute or crap?' />
                 <Graph />
                 <Row>
@@ -43,7 +42,7 @@ class Home extends Component {
                         </Card>
                     </Col>
                 </Row>
-            </Container>
+            </React.Fragment>
         )
     }
 }

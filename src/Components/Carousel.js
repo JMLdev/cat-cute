@@ -9,16 +9,19 @@ import {
 
 const items = [
   {
+    src: 'https://placekitten.com/1110/500',
     id: 1,
     altText: 'Slide 1',
     caption: 'Slide 1'
   },
   {
+    src: 'https://placekitten.com/1110/500',
     id: 2,
     altText: 'Slide 2',
     caption: 'Slide 2'
   },
   {
+    src: 'https://placekitten.com/1110/500',
     id: 3,
     altText: 'Slide 3',
     caption: 'Slide 3'
@@ -73,6 +76,7 @@ class CatCarousel extends Component {
           onExiting={this.onExiting}
           onExited={this.onExited}
         >
+          <img src={item.src} alt={item.altText} />
           <CarouselCaption className="text-danger" captionText={item.caption} captionHeader={item.caption} />
         </CarouselItem>
       );
