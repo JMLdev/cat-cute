@@ -30,7 +30,7 @@ class Navigation extends Component {
             <Row>
                 <Col>
                     <Navbar color="light" light expand="md">
-                        <NavbarBrand href="/"><img src={window.location.origin + '/images/logo.png'} alt="Cats website logo"/></NavbarBrand>
+                        <NavbarBrand tag={Link} to="/"><img src={window.location.origin + '/images/logo.png'} alt="Cats website logo"/></NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
