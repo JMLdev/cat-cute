@@ -44,7 +44,7 @@ class CatCarousel extends Component {
 
     previous() {
         if (this.animating) return;
-        const nextIndex = this.state.activeIndex === 0 ? this.state.textCats.length - 1 : this.state.activeIndex - 1;
+        const nextIndex = this.state.activeIndex === 0 ? this.state.testCats.length - 1 : this.state.activeIndex - 1;
         this.setState({ activeIndex: nextIndex });
     }
 
