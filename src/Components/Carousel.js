@@ -7,6 +7,11 @@ import {
   CarouselCaption
 } from 'reactstrap';
 
+// import ApiResult from './../Utilities/ApiResult';
+
+
+import * as API from './../Utilities/ApiResult';
+
 const items = [
   {
     src: 'https://placekitten.com/1110/500',
@@ -31,12 +36,20 @@ const items = [
 class CatCarousel extends Component {
   constructor(props) {
     super(props);
-    this.state = { activeIndex: 0 };
+    this.state = { testCats: [],  activeIndex: 0 };
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
     this.goToIndex = this.goToIndex.bind(this);
     this.onExiting = this.onExiting.bind(this);
     this.onExited = this.onExited.bind(this);
+  }
+
+  componentDidMount(){
+    API.getCats().then(res => {
+      this.setState({ 
+          testCats : res.data 
+      }, () => console.log(this.state.testCats));
+    });
   }
 
   onExiting() {
@@ -93,6 +106,7 @@ class CatCarousel extends Component {
               }`
           }
         </style>
+
         <Carousel
           activeIndex={activeIndex}
           next={this.next}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
 
-export class Heading extends Component<any> {
+export class Heading extends Component {
 
     render() {
         return (
