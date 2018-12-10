@@ -21,6 +21,18 @@ code {
   max-width: 50px;
 }
 
+.carousel-control-next-icon, .carousel-control-prev-icon {
+  cursor: pointer;
+}
+
+li.list-group-item p {
+  display: inline-block;
+}
+
+li.list-group-item p span.cat-name {
+  font-weight: bold;
+}
+
 .footer {
   background-color: #dddddd;
   padding: 25px 15px;

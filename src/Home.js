@@ -37,7 +37,9 @@ class Home extends Component {
                                 <CardTitle>Index of Results</CardTitle>
                                 <CardSubtitle>See a list of kitties.</CardSubtitle>
                                 <CardText>How did they fare? Find out now. Easily browse the kitty cats and see their ranking.</CardText>
-                                <Button color="success">View List</Button>
+                                <Link to="/list">
+                                    <Button color="success">View List</Button>
+                                </Link>
                             </CardBody>
                         </Card>
                     </Col>
