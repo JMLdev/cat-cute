@@ -40,6 +40,9 @@ class Navigation extends Component {
                                 <NavItem>
                                     <NavLink tag={Link} to="/rate">Rate</NavLink>
                                 </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/list">List</NavLink>
+                                </NavItem>
                             </Nav>
                         </Collapse>
                     </Navbar>

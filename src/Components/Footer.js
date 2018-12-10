@@ -26,6 +26,9 @@ class Footer extends Component {
                                 <NavLink tag={Link} to="/rate">Rate</NavLink>
                             </NavItem>
                             <NavItem>
+                                <NavLink tag={Link} to="/list">List</NavLink>
+                            </NavItem>
+                            <NavItem>
                                 <NavLink>
                                     © 2018 - Crappy Cute Cats
                                 </NavLink>
