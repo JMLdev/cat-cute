@@ -11,7 +11,7 @@ import * as API from './../Utilities/ApiResult';
 
 class CatCarousel extends Component {
     constructor(props) {
-    super(props);
+        super(props);
         this.state = { testCats: [],  activeIndex: 0 };
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
@@ -24,7 +24,7 @@ class CatCarousel extends Component {
         API.getCats().then(res => {
             this.setState({ 
                 testCats : res.data 
-            }, () => console.log(this.state.testCats));
+            });
         });
     }
 
