@@ -7,33 +7,36 @@ import {
   CarouselCaption
 } from 'reactstrap';
 
-const items = [
-  {
-    id: 1,
-    altText: 'Slide 1',
-    caption: 'Slide 1'
-  },
-  {
-    id: 2,
-    altText: 'Slide 2',
-    caption: 'Slide 2'
-  },
-  {
-    id: 3,
-    altText: 'Slide 3',
-    caption: 'Slide 3'
-  }
-];
+import ApiResult from '../Utilities/ApiResult';
 
 class CatCarousel extends Component {
   constructor(props) {
     super(props);
-    this.state = { activeIndex: 0 };
+    this.state = {
+    item : {
+      src: '',
+      id: 1,
+      altText: 'Slide 1',
+      caption: 'Slide 1'
+    },
+    activeIndex: 0,
+    items: [],
+   };
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
     this.goToIndex = this.goToIndex.bind(this);
     this.onExiting = this.onExiting.bind(this);
     this.onExited = this.onExited.bind(this);
+  }
+
+  cloneItem = (obj) => Object.assign({}, this.state.item, ...obj)
+
+
+  componentDidMount(){
+    console.log(this.props.cats)
+    this.setState({ 
+      items : this.props.cats
+    })
   }
 
   onExiting() {
@@ -46,13 +49,13 @@ class CatCarousel extends Component {
 
   next() {
     if (this.animating) return;
-    const nextIndex = this.state.activeIndex === items.length - 1 ? 0 : this.state.activeIndex + 1;
+    const nextIndex = this.state.activeIndex === this.state.items.length - 1 ? 0 : this.state.activeIndex + 1;
     this.setState({ activeIndex: nextIndex });
   }
 
   previous() {
     if (this.animating) return;
-    const nextIndex = this.state.activeIndex === 0 ? items.length - 1 : this.state.activeIndex - 1;
+    const nextIndex = this.state.activeIndex === 0 ? this.state.items.length - 1 : this.state.activeIndex - 1;
     this.setState({ activeIndex: nextIndex });
   }
 
@@ -62,19 +65,21 @@ class CatCarousel extends Component {
   }
 
   render() {
-    const { activeIndex } = this.state;
-
-    const slides = items.map((item) => {
+    const { activeIndex, items  } = this.state;
+    let slides = items.map((item) => {
       return (
-        <CarouselItem
-          className="custom-tag"
-          tag="div"
-          key={item.id}
-          onExiting={this.onExiting}
-          onExited={this.onExited}
-        >
-          <CarouselCaption className="text-danger" captionText={item.caption} captionHeader={item.caption} />
-        </CarouselItem>
+        <React.Fragment>      
+          {/* <ApiResult />     */}
+          <CarouselItem
+            className="custom-tag"
+            tag="div"
+            key={item.id}
+            onExiting={this.onExiting}
+            onExited={this.onExited} >
+            <img src={item.image.url} alt={item.image_id} />
+            <CarouselCaption className="text-danger" captionText={item.caption} captionHeader={item.caption} />
+          </CarouselItem>
+        </React.Fragment>
       );
     });
 

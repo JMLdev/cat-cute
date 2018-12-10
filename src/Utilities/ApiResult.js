@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import CatCarousel from '../Components/Carousel';
+
 const apiUrl = 'https://api.thecatapi.com/v1/favourites?sub_id=imfm4j'
 
 export default class ApiResult extends Component {
@@ -20,7 +22,7 @@ export default class ApiResult extends Component {
 
         // get the list of cats 
         axios.get(apiUrl).then(res => {
-            console.log(res);
+            console.log('cats in api ', res.data);
             this.setState({
                 cats : res.data
             });
@@ -29,9 +31,13 @@ export default class ApiResult extends Component {
 
     render() {
         return (
-          <ul>
-            { this.state.cats.map(cat => <li key={cat.image.id}><img src={cat.image.url} alt={cat.image.id} /></li>)}
-          </ul>
+            <div>
+                 <CatCarousel cats={this.state.cats} />
+            </div>
+            
+        //   <ul>
+        //     { this.state.cats.map(cat => <li key={cat.image.id}><img src={cat.image.url} alt={cat.image.id} /></li>)}
+        //   </ul>
         );
       }
 }
