@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, CardImg, CardText, CardBody,
+import { Row, Col, Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import Heading from './Components/Heading';
 import Graph from './Components/Graph';
-
 class Home extends Component {
     render() {
         return (
-            <Container>
+            <React.Fragment>
                 <Heading heading='Cats, cute or crap?' />
                 <Graph />
                 <Row>
@@ -38,12 +37,14 @@ class Home extends Component {
                                 <CardTitle>Index of Results</CardTitle>
                                 <CardSubtitle>See a list of kitties.</CardSubtitle>
                                 <CardText>How did they fare? Find out now. Easily browse the kitty cats and see their ranking.</CardText>
-                                <Button color="success">View List</Button>
+                                <Link to="/list">
+                                    <Button color="success">View List</Button>
+                                </Link>
                             </CardBody>
                         </Card>
                     </Col>
                 </Row>
-            </Container>
+            </React.Fragment>
         )
     }
 }

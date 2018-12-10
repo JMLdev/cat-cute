@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 
 import Graph from './Components/Graph';
 import Heading from './Components/Heading';
@@ -8,7 +8,7 @@ import Carousel from './Components/Carousel';
 class Rate extends Component {
     render() {
         return (
-            <Container>
+            <React.Fragment>
                 <Heading heading='Rate the kitties' />
                 <Graph />
                 <Row>
@@ -16,7 +16,7 @@ class Rate extends Component {
                         <Carousel />
                     </Col>
                 </Row>
-            </Container>
+            </React.Fragment>
         );
     }
 }
