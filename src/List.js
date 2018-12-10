@@ -3,42 +3,40 @@ import { Row, Col } from 'reactstrap';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 
 import Graph from './Components/Graph';
-
-const list = [
-    {
-        name: 'kitten',
-        src: 'https://placekitten.com/150/150',
-        text: 'bla bla bla, something words, lyrics. A song!'
-    },
-    {
-        name: 'kitten',
-        src: 'https://placekitten.com/150/150',
-        text: 'bla bla bla, something words, lyrics. A song!'
-    },
-    {
-        name: 'kitten',
-        src: 'https://placekitten.com/150/150',
-        text: 'bla bla bla, something words, lyrics. A song!'
-    }
-]
+import * as API from './Utilities/ApiResult';
 
 class List extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { testCats: [] };
+    }
+
+    componentDidMount(){
+        API.getCats().then(res => {
+            this.setState({ 
+                testCats : res.data 
+            });
+        });
+    }
+
     render() {
+
+        const kitties = this.state.testCats.map((cat) => {
+            return (
+                <ListGroupItem key={cat.image.id}>
+                    <img src={cat.image.url} alt={cat.image.id} style={{paddingRight: '20px', display: 'inline-block', maxWidth: '150px'}} />
+                    <p><span className="cat-name">{cat.image.id}</span></p>
+                </ListGroupItem>
+            )
+        })
         return (
             <React.Fragment>
                 <Graph />
                 <Row>
                     <Col>
-                        <ListGroup class="cat-list">
-                            {
-                                list.map(
-                                    cat =>
-                                    <ListGroupItem>
-                                        <img src={cat.src} alt={cat.name} style={{paddingRight: '20px', display: 'inline-block'}} />
-                                        <p><span class="cat-name">{cat.name}</span>: {cat.text}</p>
-                                    </ListGroupItem>
-                                )
-                            }
+                        <ListGroup className="cat-list">
+                            { kitties }
                         </ListGroup>
                     </Col>
                 </Row>
