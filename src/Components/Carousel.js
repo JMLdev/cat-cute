@@ -65,7 +65,7 @@ class CatCarousel extends Component {
                 onExiting={this.onExiting}
                 onExited={this.onExited}
                 >
-                    <img src={cat.image.url} alt={cat.image.id} />
+                    <img src={cat.image.url} alt={cat.image.id} style={{width: "100%"}} />
                     <CarouselCaption captionText={cat.sub_id} captionHeader={cat.image.id} />
                 </CarouselItem>
             )
