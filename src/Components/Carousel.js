@@ -7,6 +7,12 @@ import {
   CarouselCaption
 } from 'reactstrap';
 
+import ApiResult from './../Utilities/ApiResult';
+cats = ApiResult;
+// { this.state.cats.map(cat => <li key={cat.image.id}><img src={cat.image.url} alt={cat.image.id} /></li>)}
+
+const catMap = cats.map(cat => <li key={cat.image.id}><img src={cat.image.url} alt={cat.image.id} /></li>)
+
 const items = [
   {
     src: 'https://placekitten.com/1110/500',
@@ -84,6 +90,9 @@ class CatCarousel extends Component {
 
     return (
       <div>
+        <div>
+          {catMap}
+        </div>
         <style>
           {
             `.custom-tag {
