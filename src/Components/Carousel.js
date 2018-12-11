@@ -4,7 +4,8 @@ import {
     CarouselItem,
     CarouselControl,
     CarouselIndicators,
-    CarouselCaption
+    CarouselCaption,  Card, CardBody,
+    CardTitle, Button, Row, Col
 } from 'reactstrap';
 
 import * as API from './../Utilities/ApiResult';
@@ -26,6 +27,7 @@ class CatCarousel extends Component {
                 testCats : res.data 
             });
         });
+
     }
 
     onExiting() {
@@ -66,7 +68,11 @@ class CatCarousel extends Component {
                 onExited={this.onExited}
                 >
                     <img src={cat.image.url} alt={cat.image.id} style={{width: "100%"}} />
+                    
                     <CarouselCaption captionText={cat.sub_id} captionHeader={cat.image.id} />
+                    {/* Not able to view the button for voting. We need to pass parameters for the post api call */}
+                    <button type="button" onClick={() => API.isCute(cat.image.id,cat.sub_id,'1')}>Cute</button>
+                    <button type="button" onClick={() => API.isCute(cat.image.id,cat.sub_id,'0')}>Crap</button>
                 </CarouselItem>
             )
         })
@@ -87,12 +93,17 @@ class CatCarousel extends Component {
                     activeIndex={activeIndex}
                     next={this.next}
                     previous={this.previous}
+                    interval={false}
                 >
                     <CarouselIndicators items={this.state.testCats} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
                     {slides}
                     <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
                     <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
                 </Carousel>
+                {/* The below is just for testing if the post api call works. this will be removed once we have our 
+                voting button set */}
+                <Button color="success" onClick={() => API.isCute('bod','imfm4j','1')}>Cute</Button>
+                <Button color="danger" onClick={() => API.isCute()}>Crap</Button>
             </div>
         );
     }
