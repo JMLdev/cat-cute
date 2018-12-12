@@ -7,9 +7,9 @@ export default class ApiResult extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
+        this.props = {
             image_id: '',
-            sub_id:'',
+            sub_id: '',
             value: true,
         }
 
@@ -27,8 +27,8 @@ export default class ApiResult extends Component {
             event.preventDefault();
 
             const cat = {
-                "image_id": this.state.image_id,
-                "sub_id": this.state.sub_id,
+                "image_id": this.props.image_id,
+                "sub_id": this.props.sub_id,
                 "value": 1
               };
 
@@ -42,8 +42,8 @@ export default class ApiResult extends Component {
             event.preventDefault();
 
             const cat = {
-                "image_id": this.state.image_id,
-                "sub_id": this.state.sub_id,
+                "image_id": this.props.image_id,
+                "sub_id": this.props.sub_id,
                 "value": 0
               };
 

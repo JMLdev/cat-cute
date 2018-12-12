@@ -3,13 +3,18 @@ import {
     Carousel,
     CarouselItem,
     CarouselControl,
-    CarouselIndicators,
-    CarouselCaption,  Card, CardBody,
-    CardTitle, Button, Row, Col
+    CarouselCaption,
+    Button
 } from 'reactstrap';
 
 import * as API from './../Utilities/ApiResult';
 
+const style = {
+    position: 'absolute',
+    bottom: '40px',
+    voteUpLeft: '54%',
+    voteDownLeft: '40%'
+}
 class CatCarousel extends Component {
     constructor(props) {
         super(props);
@@ -39,15 +44,23 @@ class CatCarousel extends Component {
     }
 
     next() {
-        if (this.animating) return;
-        const nextIndex = this.state.activeIndex === this.state.testCats.length - 1 ? 0 : this.state.activeIndex + 1;
-        this.setState({ activeIndex: nextIndex });
+        setTimeout(
+            ()=> {
+                if (this.animating) return;
+                const nextIndex = this.state.activeIndex === this.state.testCats.length - 1 ? 0 : this.state.activeIndex + 1;
+                this.setState({ activeIndex: nextIndex });
+            }, 1000
+        )
     }
 
     previous() {
-        if (this.animating) return;
-        const nextIndex = this.state.activeIndex === 0 ? this.state.testCats.length - 1 : this.state.activeIndex - 1;
-        this.setState({ activeIndex: nextIndex });
+        setTimeout(
+            ()=> {
+                if (this.animating) return;
+                const nextIndex = this.state.activeIndex === 0 ? this.state.testCats.length - 1 : this.state.activeIndex - 1;
+                this.setState({ activeIndex: nextIndex });
+            }, 1000
+        )
     }
 
     goToIndex(newIndex) {
@@ -68,11 +81,9 @@ class CatCarousel extends Component {
                 onExited={this.onExited}
                 >
                     <img src={cat.image.url} alt={cat.image.id} style={{width: "100%"}} />
-                    
-                    <CarouselCaption captionText={cat.sub_id} captionHeader={cat.image.id} />
                     {/* Not able to view the button for voting. We need to pass parameters for the post api call */}
-                    <button type="button" onClick={() => API.isCute(cat.image.id,cat.sub_id,'1')}>Cute</button>
-                    <button type="button" onClick={() => API.isCute(cat.image.id,cat.sub_id,'0')}>Crap</button>
+                    <Button type="button" color={'success'} onClick={() => {API.isCute(cat.image.id, cat.sub_id, '1'); this.next()}} style={{position: style.position, left: style.voteUpLeft, bottom: style.bottom}}>Cute</Button>
+                    <Button type="button" color={'danger'} onClick={() => {API.isCute(cat.image.id, cat.sub_id,'0'); this.next();}} style={{position: style.position, left: style.voteDownLeft, bottom: style.bottom}}>Crap</Button>
                 </CarouselItem>
             )
         })
@@ -95,15 +106,12 @@ class CatCarousel extends Component {
                     previous={this.previous}
                     interval={false}
                 >
-                    <CarouselIndicators items={this.state.testCats} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
                     {slides}
-                    <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-                    <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
                 </Carousel>
                 {/* The below is just for testing if the post api call works. this will be removed once we have our 
                 voting button set */}
-                <Button color="success" onClick={() => API.isCute('bod','imfm4j','1')}>Cute</Button>
-                <Button color="danger" onClick={() => API.isCute()}>Crap</Button>
+                {/* <Button color="success" onClick={() => API.isCute('bod','imfm4j','1')}>Cute</Button>
+                <Button color="danger" onClick={() => API.isCute()}>Crap</Button> */}
             </div>
         );
     }

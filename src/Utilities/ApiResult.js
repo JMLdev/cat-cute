@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import axios from 'axios';
 
 const apiUrl = 'https://api.thecatapi.com/v1/favourites?sub_id=imfm4j'
@@ -15,7 +14,7 @@ export function  getCats(){
 }
 
 // Post Api for Voting
-export function isCute(image_id,sub_id,yes_or_no){
+export function isCute(image_id, sub_id, yes_or_no){
     axios.defaults.headers = {
         'CONTENT-TYPE': 'APPLICATION/JSON',
         'X-API-KEY': 'D70CED34-3597-4AA8-AD8C-2861CBE8452C'
