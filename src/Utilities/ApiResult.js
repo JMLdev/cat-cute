@@ -13,6 +13,10 @@ export function  getCats(){
     return axios.get(apiUrl)
 }
 
+export function findCute(cat_id) {
+    axios.get(apiVoteUrl + cat_id).then(res => {
+    })
+}
 // Post Api for Voting
 export function isCute(image_id, sub_id, yes_or_no){
     axios.defaults.headers = {
@@ -27,7 +31,6 @@ export function isCute(image_id, sub_id, yes_or_no){
       };
 
     axios.post(apiVoteUrl, cat).then(res => {
-        console.log(res);
         console.log(res.data);
     })
 }
