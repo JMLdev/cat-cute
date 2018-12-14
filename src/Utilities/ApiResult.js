@@ -4,26 +4,35 @@ const apiUrl = 'https://api.thecatapi.com/v1/favourites?sub_id=imfm4j'
 const apiVoteUrl = 'https://api.thecatapi.com/v1/votes'
 const apiGetVoteUrl = 'https://api.thecatapi.com/v1/votes?sub_id=imfm4j'
 
+const returnHeaders = () => {
+    return (
+        axios.defaults.headers = {
+            'CONTENT-TYPE': 'APPLICATION/JSON',
+            'X-API-KEY': 'D70CED34-3597-4AA8-AD8C-2861CBE8452C'
+        }
+    )
+}
+
 export function  getCats(){
-    axios.defaults.headers = {
-        'CONTENT-TYPE': 'APPLICATION/JSON',
-        'X-API-KEY': 'D70CED34-3597-4AA8-AD8C-2861CBE8452C'
-    }
+    returnHeaders();
 
     // GET THE LIST OF CATS 
     return axios.get(apiUrl)
+
+    // returns 
+    // {
+    //     created_at: "2018-12-06T18:19:12.000Z",
+    //     id: 4124,
+    //     image: {id: "bod", url: "https://cdn2.thecatapi.com/images/bod.jpg"},
+    //     image_id: "bod",
+    //     sub_id: "imfm4j",
+    //     user_id: "imfm4j"
+    // }
 }
 
-export function findCute(cat_id) {
-    axios.get(apiVoteUrl + cat_id).then(res => {
-    })
-}
 // Post Api for Voting
 export function isCute(image_id, sub_id, yes_or_no){
-    axios.defaults.headers = {
-        'CONTENT-TYPE': 'APPLICATION/JSON',
-        'X-API-KEY': 'D70CED34-3597-4AA8-AD8C-2861CBE8452C'
-    }
+    returnHeaders();
 
     const cat = {
         "image_id": image_id,
@@ -31,16 +40,11 @@ export function isCute(image_id, sub_id, yes_or_no){
         "value": yes_or_no
       };
 
-    axios.post(apiVoteUrl, cat).then(res => {
-        console.log(res.data);
-    })
+    axios.post(apiVoteUrl, cat);
 }
 
-export function  getVotes(){
-    axios.defaults.headers = {
-        'CONTENT-TYPE': 'APPLICATION/JSON',
-        'X-API-KEY': 'D70CED34-3597-4AA8-AD8C-2861CBE8452C'
-    }
+export function getVotes() {
+    returnHeaders();
 
     // GET THE VOTES 
     /* Result includes following parameters: (example)
@@ -55,8 +59,4 @@ export function  getVotes(){
          We need to use value for vote (1 or 0) and image_id and sub_id to map with the testcats[] list
     */
     return axios.get(apiGetVoteUrl)
-}
-
-export function mappingVotes(){
-   
 }
