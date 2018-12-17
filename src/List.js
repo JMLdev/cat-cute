@@ -27,11 +27,8 @@ class List extends Component {
             this.setState({
                 listVotes: res.data
             });
-        });
-    }
-
-    render() {
-        let prettyKitties = () =>{
+        }).then(() => {
+            let catList = Object.assign({}, this.state.listCats)
             // loop the top level objects
             for (let key in this.state.listVotes) {
                 // loop each key
@@ -40,10 +37,10 @@ class List extends Component {
                         if (typeof this.state.listVotes[key].value !== 'undefined') {
                             let id = this.state.listVotes[key].image_id;
                             let vote = this.state.listVotes[key].value;
-                            for (let key in this.state.listCats) {
-                                for (let subkey in this.state.listCats) {
-                                    if (this.state.listCats[key].image_id === id) {
-                                        this.state.listCats[key].value = vote;
+                            for (let key in catList) {
+                                for (let subkey in catList) {
+                                    if (catList[key].image_id === id) {
+                                        catList[key].value = vote;
                                     }
                                 }
                             }
@@ -51,11 +48,20 @@ class List extends Component {
                     }
                 }
             }
-            console.log(this.state.listCats);
+            this.setState({ listCats : catList })
+        })
+    }
+
+    hotOrNot = (vote) => {
+        if (vote == "1") {
+            return 'success';
         }
+    }
+
+    render() {
         const kitties = this.state.theCats.map((cat) => {
             return (
-                <ListGroupItem key={cat.image.id}>
+                <ListGroupItem key={cat.image.id} color={this.hotOrNot(cat.value)} >
                     <img src={cat.image.url} alt={cat.image.id} style={{paddingRight: '20px', display: 'inline-block', maxWidth: '150px'}} />
                     <p><span className="cat-name">{cat.image.id}</span></p>
                 </ListGroupItem>
@@ -63,7 +69,6 @@ class List extends Component {
         })
         return (
             <React.Fragment>
-                {prettyKitties()}
                 <Graph />
                 <Row>
                     <Col>
