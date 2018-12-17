@@ -38,6 +38,7 @@ class List extends Component {
                             let id = this.state.listVotes[key].image_id;
                             let vote = this.state.listVotes[key].value;
                             for (let key in catList) {
+                                // eslint-disable-next-line
                                 for (let subkey in catList) {
                                     if (catList[key].image_id === id) {
                                         catList[key].value = vote;
