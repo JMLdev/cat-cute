@@ -16,7 +16,7 @@ class List extends Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         API.getCats().then(res => {
             this.setState({ 
                 theCats : res.data,
