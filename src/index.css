@@ -33,6 +33,14 @@ li.list-group-item p span.cat-name {
   font-weight: bold;
 }
 
+.btn-danger.focus {
+  box-shadow: 0 0 0 0.4rem rgba(220,53,69,.5);
+}
+
+.btn-success.focus {
+  box-shadow: 0 0 0 0.4rem rgba(40,167,69,.5);
+}
+
 .footer {
   background-color: #dddddd;
   padding: 25px 15px;

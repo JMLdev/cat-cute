@@ -16,7 +16,11 @@ const style = {
 class CatCarousel extends Component {
     constructor(props) {
         super(props);
-        this.state = { testCats: [],  activeIndex: 0 };
+        this.state = { 
+            theCats: [],listCats: {},
+            listVotes: {}, 
+            activeIndex: 0 
+        };
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
         this.goToIndex = this.goToIndex.bind(this);
@@ -24,13 +28,40 @@ class CatCarousel extends Component {
         this.onExited = this.onExited.bind(this);
     }
 
-    componentDidMount(){
+    componentWillMount() {
         API.getCats().then(res => {
             this.setState({ 
-                testCats : res.data 
+                theCats : res.data,
+                listCats: res.data
             });
         });
-
+        API.getVotes().then(res => {
+            this.setState({
+                listVotes: res.data
+            });
+        }).then(() => {
+            let catList = Object.assign({}, this.state.listCats)
+            // loop the top level objects
+            for (let key in this.state.listVotes) {
+                // loop each key
+                for (let subkey in this.state.listVotes) {
+                    if (this.state.listVotes.hasOwnProperty(subkey)) {
+                        if (typeof this.state.listVotes[key].value !== 'undefined') {
+                            let id = this.state.listVotes[key].image_id;
+                            let vote = this.state.listVotes[key].value;
+                            for (let key in catList) {
+                                for (let subkey in catList) {
+                                    if (catList[key].image_id === id) {
+                                        catList[key].value = vote;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            this.setState({ listCats : catList })
+        })
     }
 
     onExiting() {
@@ -45,7 +76,7 @@ class CatCarousel extends Component {
         setTimeout(
             ()=> {
                 if (this.animating) return;
-                const nextIndex = this.state.activeIndex === this.state.testCats.length - 1 ? 0 : this.state.activeIndex + 1;
+                const nextIndex = this.state.activeIndex === this.state.theCats.length - 1 ? 0 : this.state.activeIndex + 1;
                 this.setState({ activeIndex: nextIndex });
             }, 1000
         )
@@ -55,7 +86,7 @@ class CatCarousel extends Component {
         setTimeout(
             ()=> {
                 if (this.animating) return;
-                const nextIndex = this.state.activeIndex === 0 ? this.state.testCats.length - 1 : this.state.activeIndex - 1;
+                const nextIndex = this.state.activeIndex === 0 ? this.state.theCats.length - 1 : this.state.activeIndex - 1;
                 this.setState({ activeIndex: nextIndex });
             }, 1000
         )
@@ -66,10 +97,15 @@ class CatCarousel extends Component {
         this.setState({ activeIndex: newIndex });
     }
 
+    showVote(voteName, voteValue) {
+        if (voteName === voteValue) {
+            return 'focus';
+        }
+    }
+
     render() {
         const { activeIndex } = this.state;
-
-        const slides = this.state.testCats.map((cat) => {
+        const slides = this.state.theCats.map((cat) => {
             return (
                 <CarouselItem
                 className="custom-tag"
@@ -80,8 +116,12 @@ class CatCarousel extends Component {
                 >
                     <img src={cat.image.url} alt={cat.image.id} style={{width: "100%"}} />
                     {/* Not able to view the button for voting. We need to pass parameters for the post api call */}
-                    <Button type="button" color={'success'} onClick={() => {API.isCute(cat.image.id, cat.sub_id, '1'); this.next()}} style={{position: style.position, left: style.voteUpLeft, bottom: style.bottom}}>Cute</Button>
-                    <Button type="button" color={'danger'} onClick={() => {API.isCute(cat.image.id, cat.sub_id,'0'); this.next();}} style={{position: style.position, left: style.voteDownLeft, bottom: style.bottom}}>Crap</Button>
+                    
+                    <Button type="button" color={'danger'} onClick={() => {API.isCute(cat.image.id, cat.sub_id,'0'); this.next();}} 
+                    style={{position: style.position, left: style.voteDownLeft, bottom: style.bottom}} className={this.showVote(cat.value, 0)} >Crap</Button>
+
+                    <Button type="button" color={'success'} onClick={() => {API.isCute(cat.image.id, cat.sub_id, '1'); this.next()}} 
+                    style={{position: style.position, left: style.voteUpLeft, bottom: style.bottom}} className={this.showVote(cat.value, 1)} >Cute</Button>
                 </CarouselItem>
             )
         })

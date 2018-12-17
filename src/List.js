@@ -53,7 +53,7 @@ class List extends Component {
     }
 
     hotOrNot = (vote) => {
-        if (vote == "1") {
+        if (vote === 1) {
             return 'success';
         }
     }
