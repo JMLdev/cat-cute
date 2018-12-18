@@ -4,6 +4,7 @@ import {
     CarouselItem,
     Button
 } from 'reactstrap';
+import Graph from './Graph';
 
 import * as API from './../Utilities/ApiResult';
 
@@ -138,7 +139,7 @@ class CatCarousel extends Component {
                         }`
                     }
                 </style>
-
+                <Graph list={this.state.listVotes}  />
                 <Carousel
                     activeIndex={activeIndex}
                     next={this.next}

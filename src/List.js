@@ -70,7 +70,7 @@ class List extends Component {
         })
         return (
             <React.Fragment>
-                <Graph />
+                <Graph list={this.state.theCats} />
                 <Row>
                     <Col>
                         <ListGroup className="cat-list">
