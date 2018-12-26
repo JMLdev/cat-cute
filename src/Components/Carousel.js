@@ -92,15 +92,6 @@ class CatCarousel extends Component {
 
         return (
             <div>
-                <style>
-                    {
-                    `.custom-tag {
-                        max-width: 100%;
-                        height: 500px;
-                        background: black;
-                        }`
-                    }
-                </style>
                 <Graph list={this.props.list}  />
                 <Carousel
                     activeIndex={activeIndex}
