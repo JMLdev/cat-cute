@@ -61,7 +61,9 @@ class App extends Component {
                 <Route exact path='/' 
                     render={(props) => <Home {...props} list={this.state.theCats} />}
                 />
-                <Route path='/rate' component={Rate}/>
+                <Route path='/rate' 
+                    render={(props) => <Rate {...props} list={this.state.theCats} />}
+                />
                 <Route 
                     path='/list' 
                     render={(props) => <List {...props} list={this.state.theCats} />}

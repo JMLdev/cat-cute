@@ -11,7 +11,7 @@ class Rate extends Component {
                 <Heading heading='Rate the kitties' />
                 <Row>
                     <Col sm={12} >
-                        <Carousel />
+                        <Carousel list={this.props.list} />
                     </Col>
                 </Row>
             </React.Fragment>

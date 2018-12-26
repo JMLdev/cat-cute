@@ -17,8 +17,7 @@ const style = {
 class CatCarousel extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            theCats: [],listCats: {},
+        this.state = {
             listVotes: {}, 
             activeIndex: 0 
         };
@@ -27,43 +26,6 @@ class CatCarousel extends Component {
         this.goToIndex = this.goToIndex.bind(this);
         this.onExiting = this.onExiting.bind(this);
         this.onExited = this.onExited.bind(this);
-    }
-
-    componentWillMount() {
-        API.getCats().then(res => {
-            this.setState({ 
-                theCats : res.data,
-                listCats: res.data
-            });
-        });
-        API.getVotes().then(res => {
-            this.setState({
-                listVotes: res.data
-            });
-        }).then(() => {
-            let catList = Object.assign({}, this.state.listCats)
-            // loop the top level objects
-            for (let key in this.state.listVotes) {
-                // loop each key
-                for (let subkey in this.state.listVotes) {
-                    if (this.state.listVotes.hasOwnProperty(subkey)) {
-                        if (typeof this.state.listVotes[key].value !== 'undefined') {
-                            let id = this.state.listVotes[key].image_id;
-                            let vote = this.state.listVotes[key].value;
-                            for (let key in catList) {
-                                // eslint-disable-next-line
-                                for (let subkey in catList) {
-                                    if (catList[key].image_id === id) {
-                                        catList[key].value = vote;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            this.setState({ listCats : catList })
-        })
     }
 
     onExiting() {
@@ -78,7 +40,7 @@ class CatCarousel extends Component {
         setTimeout(
             ()=> {
                 if (this.animating) return;
-                const nextIndex = this.state.activeIndex === this.state.theCats.length - 1 ? 0 : this.state.activeIndex + 1;
+                const nextIndex = this.state.activeIndex === this.props.list.length - 1 ? 0 : this.state.activeIndex + 1;
                 this.setState({ activeIndex: nextIndex });
             }, 1000
         )
@@ -88,7 +50,7 @@ class CatCarousel extends Component {
         setTimeout(
             ()=> {
                 if (this.animating) return;
-                const nextIndex = this.state.activeIndex === 0 ? this.state.theCats.length - 1 : this.state.activeIndex - 1;
+                const nextIndex = this.state.activeIndex === 0 ? this.props.list.length - 1 : this.state.activeIndex - 1;
                 this.setState({ activeIndex: nextIndex });
             }, 1000
         )
@@ -107,7 +69,7 @@ class CatCarousel extends Component {
 
     render() {
         const { activeIndex } = this.state;
-        const slides = this.state.theCats.map((cat) => {
+        const slides = this.props.list.map((cat) => {
             return (
                 <CarouselItem
                 className="custom-tag"
@@ -139,7 +101,7 @@ class CatCarousel extends Component {
                         }`
                     }
                 </style>
-                <Graph list={this.state.listVotes}  />
+                <Graph list={this.props.list}  />
                 <Carousel
                     activeIndex={activeIndex}
                     next={this.next}
@@ -148,10 +110,6 @@ class CatCarousel extends Component {
                 >
                     {slides}
                 </Carousel>
-                {/* The below is just for testing if the post api call works. this will be removed once we have our 
-                voting button set */}
-                {/* <Button color="success" onClick={() => API.isCute('bod','imfm4j','1')}>Cute</Button>
-                <Button color="danger" onClick={() => API.isCute()}>Crap</Button> */}
             </div>
         );
     }
