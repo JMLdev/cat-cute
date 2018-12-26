@@ -26,7 +26,7 @@ class Graph extends Component {
         return Math.floor(this.getCute(0) / (this.getCute(1) + this.getCute(0)) * 100)
     }
 
-    render(props) {
+    render() {
         return (
             
             <Row style={{marginBottom: '24px'}}>

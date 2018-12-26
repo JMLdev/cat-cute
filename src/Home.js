@@ -10,7 +10,7 @@ class Home extends Component {
         return (
             <React.Fragment>
                 <Heading heading='Cats, cute or crap?' />
-                <Graph />
+                <Graph list={this.props.list} />
                 <Row>
                     <Col>
                         <p style={{marginBottom: '24px'}}>Cat ipsum dolor sit amet, sleep but scratch my tummy actually i hate you now fight me. Sleep everywhere, but not in my bed flop over scratch my tummy actually i hate you now fight me curl into a furry donut. Chase after silly colored fish toys around the house scratch my tummy actually i hate you now fight me and human clearly uses close to one life a night no one naps that long so i revive by standing on chestawaken! </p>

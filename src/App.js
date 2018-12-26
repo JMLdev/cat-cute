@@ -9,6 +9,15 @@ import * as API from './Utilities/ApiResult';
 
 class App extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = { 
+            theCats: [],
+            listCats: {},
+            listVotes: {}
+        };
+    }
+
     componentWillMount() {
         API.getCats().then(res => {
             this.setState({ 
@@ -49,9 +58,14 @@ class App extends Component {
     render() {
         return (
             <Switch>
-                <Route exact path='/' component={Home}/>
+                <Route exact path='/' 
+                    render={(props) => <Home {...props} list={this.state.theCats} />}
+                />
                 <Route path='/rate' component={Rate}/>
-                <Route path='/list' component={List}/>
+                <Route 
+                    path='/list' 
+                    render={(props) => <List {...props} list={this.state.theCats} />}
+                />
             </Switch>
         );
     }
