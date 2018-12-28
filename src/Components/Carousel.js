@@ -14,6 +14,7 @@ const style = {
     voteUpLeft: '54%',
     voteDownLeft: '40%'
 }
+
 class CatCarousel extends Component {
     constructor(props) {
         super(props);
@@ -67,6 +68,10 @@ class CatCarousel extends Component {
         }
     }
 
+    updateCute(value) {
+        this.props.tally[value] = this.props.tally[value] + 1;
+    }
+
     render() {
         const { activeIndex } = this.state;
         const slides = this.props.list.map((cat) => {
@@ -81,10 +86,10 @@ class CatCarousel extends Component {
                     <img src={cat.image.url} alt={cat.image.id} style={{width: "100%"}} />
                     {/* Not able to view the button for voting. We need to pass parameters for the post api call */}
                     
-                    <Button type="button" color={'danger'} onClick={() => {API.isCute(cat.image.id, cat.sub_id,'0'); this.next();}} 
+                    <Button type="button" color={'danger'} onClick={() => {API.isCute(cat.image.id, cat.sub_id,'0'); this.updateCute("crap"); this.next();}} 
                     style={{position: style.position, left: style.voteDownLeft, bottom: style.bottom}} className={this.showVote(cat.value, 0)} >Crap</Button>
 
-                    <Button type="button" color={'success'} onClick={() => {API.isCute(cat.image.id, cat.sub_id, '1'); this.next()}} 
+                    <Button type="button" color={'success'} onClick={() => {API.isCute(cat.image.id, cat.sub_id, '1'); this.updateCute("cute"); this.next()}} 
                     style={{position: style.position, left: style.voteUpLeft, bottom: style.bottom}} className={this.showVote(cat.value, 1)} >Cute</Button>
                 </CarouselItem>
             )
@@ -101,7 +106,7 @@ class CatCarousel extends Component {
                         }`
                     }
                 </style>
-                <Graph list={this.props.list}  />
+                <Graph tally={this.props.tally} />
                 <Carousel
                     activeIndex={activeIndex}
                     next={this.next}

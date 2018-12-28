@@ -14,8 +14,24 @@ class App extends Component {
         this.state = { 
             theCats: [],
             listCats: {},
-            listVotes: {}
+            listVotes: {},
+            tally: {
+                cute: 0,
+                crap: 0
+            }
         };
+    }
+    // get the total votes for cute or crap
+    getCute(cuteOrCrap) {
+        let cute = 0;
+        for (let key in this.state.listVotes) {
+            if (typeof key !== "undefined") {
+                if (this.state.listVotes[key].value === cuteOrCrap) {
+                    cute++;
+                }
+            }
+        }
+        return cute;
     }
 
     componentWillMount() {
@@ -51,22 +67,33 @@ class App extends Component {
                     }
                 }
             }
+            // set the state to new object with merged values
             this.setState({ listCats : catList })
+            // create a new object for tally
+            let newTally = {
+                cute: this.getCute(1),
+                crap: this.getCute(0)
+            }
+            // set the tally to the new values
+            this.setState({ tally : newTally });
         })
+    }
+
+    componentDidUpdate() {
     }
 
     render() {
         return (
             <Switch>
                 <Route exact path='/' 
-                    render={(props) => <Home {...props} list={this.state.theCats} />}
+                    render={(props) => <Home {...props} list={this.state.theCats} tally={this.state.tally} />}
                 />
                 <Route path='/rate' 
-                    render={(props) => <Rate {...props} list={this.state.theCats} />}
+                    render={(props) => <Rate {...props} list={this.state.theCats} tally={this.state.tally} />}
                 />
                 <Route 
                     path='/list' 
-                    render={(props) => <List {...props} list={this.state.theCats} />}
+                    render={(props) => <List {...props} list={this.state.theCats} tally={this.state.tally} />}
                 />
             </Switch>
         );

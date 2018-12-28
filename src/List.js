@@ -23,7 +23,7 @@ class List extends Component {
         })
         return (
             <React.Fragment>
-                <Graph list={this.props.list} />
+                <Graph tally={this.props.tally} />
                 <Row>
                     <Col>
                         <ListGroup className="cat-list">
