@@ -68,8 +68,10 @@ class CatCarousel extends Component {
         }
     }
 
-    updateCute(value) {
-        this.props.tally[value] = this.props.tally[value] + 1;
+    updateCute(catValue, value) {
+        if (catValue !== value) {
+            this.props.tally[value] = this.props.tally[value] + 1;
+        }
     }
 
     render() {
@@ -86,10 +88,10 @@ class CatCarousel extends Component {
                     <img src={cat.image.url} alt={cat.image.id} style={{width: "100%"}} />
                     {/* Not able to view the button for voting. We need to pass parameters for the post api call */}
                     
-                    <Button type="button" color={'danger'} onClick={() => {API.isCute(cat.image.id, cat.sub_id,'0'); this.updateCute("crap"); this.next();}} 
+                    <Button type="button" color={'danger'} onClick={() => {API.isCute(cat.image.id, cat.sub_id,'0'); this.updateCute(cat.value, 0); this.next();}} 
                     style={{position: style.position, left: style.voteDownLeft, bottom: style.bottom}} className={this.showVote(cat.value, 0)} >Crap</Button>
 
-                    <Button type="button" color={'success'} onClick={() => {API.isCute(cat.image.id, cat.sub_id, '1'); this.updateCute("cute"); this.next()}} 
+                    <Button type="button" color={'success'} onClick={() => {API.isCute(cat.image.id, cat.sub_id, '1'); this.updateCute(cat.value, 1); this.next()}} 
                     style={{position: style.position, left: style.voteUpLeft, bottom: style.bottom}} className={this.showVote(cat.value, 1)} >Cute</Button>
                 </CarouselItem>
             )

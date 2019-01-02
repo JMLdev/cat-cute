@@ -16,8 +16,8 @@ class App extends Component {
             listCats: {},
             listVotes: {},
             tally: {
-                cute: 0,
-                crap: 0
+                1: 0,
+                0: 0
             }
         };
     }
@@ -71,8 +71,8 @@ class App extends Component {
             this.setState({ listCats : catList })
             // create a new object for tally
             let newTally = {
-                cute: this.getCute(1),
-                crap: this.getCute(0)
+                1: this.getCute(1),
+                0: this.getCute(0)
             }
             // set the tally to the new values
             this.setState({ tally : newTally });
