@@ -20,6 +20,7 @@ class App extends Component {
                 0: 0
             }
         };
+        this.updateVoteCount = this.updateVoteCount.bind(this);
     }
     // get the total votes for cute or crap
     getCute(cuteOrCrap) {
@@ -79,7 +80,11 @@ class App extends Component {
         })
     }
 
-    componentDidUpdate() {
+    updateVoteCount(kitty, newValue) {
+        let oldKittyValue = this.state.theCats[kitty].value;
+        if (oldKittyValue !== newValue) {
+            this.setState({oldKittyValue: oldKittyValue = newValue})
+        }
     }
 
     render() {
@@ -89,7 +94,7 @@ class App extends Component {
                     render={(props) => <Home {...props} list={this.state.theCats} tally={this.state.tally} />}
                 />
                 <Route path='/rate' 
-                    render={(props) => <Rate {...props} list={this.state.theCats} tally={this.state.tally} />}
+                    render={(props) => <Rate {...props} list={this.state.theCats} tally={this.state.tally} updateVoteCount={this.updateVoteCount} />}
                 />
                 <Route 
                     path='/list' 
