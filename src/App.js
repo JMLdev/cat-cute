@@ -81,10 +81,12 @@ class App extends Component {
     }
 
     updateVoteCount(kitty, newValue) {
-        let oldKittyValue = this.state.theCats[kitty].value;
+        var oldKittyValue = {...this.state.theCats[kitty].value};
+        let newKittyValue = this.state.theCats[kitty].value = newValue;
         if (oldKittyValue !== newValue) {
-            this.setState({oldKittyValue: oldKittyValue = newValue})
+            this.setState({oldKittyValue: newKittyValue})
         }
+        console.log(this.state.theCats[kitty])
     }
 
     render() {

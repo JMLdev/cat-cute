@@ -90,7 +90,7 @@ class CatCarousel extends Component {
                     {/* Not able to view the button for voting. We need to pass parameters for the post api call */}
                     
                     <Button type="button" color={'danger'} data-tag={individualCat} 
-                    onClick={(event) => {API.isCute(cat.image.id, cat.sub_id,'0'); this.updateCute(cat.value, 0);  this.props.updateVoteCount(event.target.getAttribute('data-tag'), 0); this.next(); }} 
+                    onClick={(event) => {API.isCute(cat.image.id, cat.sub_id,'0'); this.updateCute(cat.value, 0);  this.props.updateVoteCount(event.target.getAttribute('data-tag'), 0); this.next();}} 
                     style={{position: style.position, left: style.voteDownLeft, bottom: style.bottom}} className={this.showVote(cat.value, 0)} >
                         Crap
                     </Button>
