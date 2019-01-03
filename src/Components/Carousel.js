@@ -69,7 +69,14 @@ class CatCarousel extends Component {
 
     updateCute(catValue, value) {
         if (catValue !== value) {
-            this.props.tally[value] = this.props.tally[value] + 1;
+            if (value === 1) {
+                this.props.tally[1] = this.props.tally[1] + 1;
+                this.props.tally[0] = this.props.tally[0] - 1;
+            }
+            else if (value === 0) {
+                this.props.tally[0] = this.props.tally[0] + 1;
+                this.props.tally[1] = this.props.tally[1] - 1;
+            }
         }
     }
 
