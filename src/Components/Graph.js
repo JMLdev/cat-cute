@@ -3,27 +3,17 @@ import { Row, Col, Progress } from 'reactstrap';
 
 class Graph extends Component {
 
-    getCute(cuteOrCrap) {
-        let cute = 0;
-        for (let key in this.props.list) {
-            if (typeof key !== "undefined") {
-                if (this.props.list[key].value === cuteOrCrap) {
-                    cute++;
-                }
-            }
-        }
-        return cute;
-    }
-
+    // returns the number of cute cats out of the list. 1 is cute, 0 is not
     returnCute() {
-        return Math.floor(this.getCute(1) / (this.getCute(1) + this.getCute(0)) * 100)
+        return Math.floor(this.props.tally[1] / (this.props.tally[1] + this.props.tally[0]) * 100)
     }
 
+    // returns the number of crappy cats
     returnCrap() {
-        return Math.floor(this.getCute(0) / (this.getCute(1) + this.getCute(0)) * 100)
+        return Math.floor(this.props.tally[0] / (this.props.tally[1] + this.props.tally[0]) * 100)
     }
 
-    render(props) {
+    render() {
         return (
             
             <Row style={{marginBottom: '24px'}}>
