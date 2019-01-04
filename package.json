@@ -1,4 +1,5 @@
 {
+  "homepage": "https://jmldev.github.io/cat-cute/",
   "name": "lessons",
   "version": "0.1.0",
   "private": true,
@@ -30,6 +31,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "homepage": "https://jmldev.github.io/cat-cute/"
+  ]
 }
