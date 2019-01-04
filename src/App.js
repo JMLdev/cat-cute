@@ -92,7 +92,7 @@ class App extends Component {
 
     render() {
         return <Switch>
-            <Route exact path="/" basename={process.env.PUBLIC_URL} render={props => <Home {...props} list={this.state.theCats} tally={this.state.tally} />} />
+            <Route exact path="/" render={props => <Home {...props} list={this.state.theCats} tally={this.state.tally} />} />
             <Route path="/rate" render={props => <Rate {...props} list={this.state.theCats} tally={this.state.tally} updateVoteCount={this.updateVoteCount} />} />
             <Route path="/list" render={props => <List {...props} list={this.state.theCats} tally={this.state.tally} />} />
           </Switch>;

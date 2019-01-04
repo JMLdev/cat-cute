@@ -12,7 +12,7 @@ import Footer from './Components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Container>
             <Navigation />
             <App />
