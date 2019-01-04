@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import createHashHistory from 'react-router';
 import * as serviceWorker from './serviceWorker';
 import { Container } from 'reactstrap';
 
@@ -11,8 +12,10 @@ import Footer from './Components/Footer';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const hashHistory = createHashHistory({ basename: process.env.PUBLIC_URL });
+
 ReactDOM.render(
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router history={hashHistory} >
         <Container>
             <Navigation />
             <App />
