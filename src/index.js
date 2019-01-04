@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { Router } from 'react-router-dom';
+import { Router } from 'react-router';
 import createHashHistory from 'history/createHashHistory';
 import * as serviceWorker from './serviceWorker';
 import { Container } from 'reactstrap';
